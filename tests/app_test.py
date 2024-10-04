@@ -17,6 +17,9 @@ def client():
     with app.app_context():
         db.create_all()  # setup
         yield app.test_client()  # tests run here
+
+        # Explicitly close DB connection
+        db.session.close()
         db.drop_all()  # teardown
 
 
